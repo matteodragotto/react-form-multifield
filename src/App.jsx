@@ -28,15 +28,15 @@ const App = () => {
   }
 
   const publishHandler = () => {
-    setPublish([...publish, formData])
+    setPublish([...publish, { formData, id: publish.length + 1 }])
     console.log(publish);
 
   }
 
-  // const removeHandler = (id) => {
-  //   const removePublished = publish.filter(post => post.id !== id)
-  //   setPublish(removePublished)
-  // }
+  const removeHandler = (id) => {
+    const removePublished = publish.filter(post => post.id !== id)
+    setPublish(removePublished)
+  }
 
   return (
     <div className="container my-5">
@@ -105,6 +105,7 @@ const App = () => {
                 <span>{post.content}</span>
                 <span>{post.category}</span>
                 <span>{post.tags}</span>
+                <i className="fa-solid fa-square-minus remove" onClick={() => removeHandler(post.id)}></i>
               </li>
             ))}
           </ul>
