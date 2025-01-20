@@ -1,43 +1,48 @@
 import { useState } from "react"
 
 const defaultFormData = {
-  id: 1,
+  id: 0,
   title: '',
   image: '',
   content: '',
   category: '',
-  tags: [],
-  published: false
+  tags: []
 }
 
 const App = () => {
 
   const [formData, setFormData] = useState(defaultFormData)
+  const [publish, setPublish] = useState([])
 
   const submitHandler = (e) => {
     e.preventDefault()
     console.log(formData);
-
-
   }
 
   const changeHandler = (e) => {
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
   }
 
+  const publishHandler = () => {
+    setPublish([...publish, formData])
+    console.log(publish);
+
+  }
+
   // const removeHandler = (id) => {
-  //   const newPostList = postTitle.filter(title => title.id !== id)
-  //   setPostTitle(newPostList)
+  //   const removePublished = publish.filter(post => post.id !== id)
+  //   setPublish(removePublished)
   // }
 
   return (
     <div className="container my-5">
       <div className="row">
         <h1>Inserisci qui il titolo dell'articolo per il tuo blog</h1>
-        <div className="col-6 d-flex justify-content-center flex-column">
+        <div className="col-6 d-flex flex-column">
 
           <form action="#" onSubmit={submitHandler}>
             <input
@@ -72,23 +77,37 @@ const App = () => {
             </select>
             <h3 className="mt-3">Scegli dei tag</h3>
             <div className="tagsContainer d-flex justify-content-start">
-              <div className="form-check mt-3">
+              <div className="form-check m-3 p-3">
                 <input type='checkbox' className='form-check-input' name='tags' value='Piatti veloci' id='piattiVeloci' onChange={changeHandler} />
-                <label class="form-check-label" htmlFor='piattiVeloci'>
+                <label className="form-check-label" htmlFor='piattiVeloci'>
                   Piatti veloci
                 </label>
               </div>
-              <div className="form-check mt-3">
-                <input type='checkbox' className='form-check-input' name='tags' value='Cucina sana' id='cucinaSana' onChange={changeHandler} />
-                <label class="form-check-label" htmlFor='cucinaSana'>
-                  Cucina sana
+              <div className="form-check m-3 p-3">
+                <input type='checkbox' className='form-check-input' name='tags' value='InnovazioneTech' id='innovazioneTech' onChange={changeHandler} />
+                <label className="form-check-label" htmlFor='innovazioneTech'>
+                  Innovazione Tech
                 </label>
               </div>
-
-
             </div>
-            <button className="btn btn-success my-3" type="submit"> Invia</button>
+
+            <button className="btn btn-success m-3" type="submit"> Salva</button>
+            <button className="btn btn-primary m-3" onClick={publishHandler}>Pubblica</button>
+
           </form>
+        </div>
+        <div className="col-6">
+          <ul className="list-group">
+            {publish.map((post, index) => (
+              <li key={index} className="list-group-item d-flex justify-content-around flex-wrap" >
+                <span>{post.title}</span>
+                <span>{post.image}</span>
+                <span>{post.content}</span>
+                <span>{post.category}</span>
+                <span>{post.tags}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
