@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { use } from "react"
+import { useState, useEffect } from "react"
 
 const defaultFormData = {
   title: '',
@@ -12,6 +13,7 @@ const App = () => {
 
   const [formData, setFormData] = useState(defaultFormData)
   const [publish, setPublish] = useState([])
+  const [oldPublishLength, setOldPublishLength] = useState(publish.length)
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -19,9 +21,6 @@ const App = () => {
   }
 
   const changeHandler = (e) => {
-
-
-
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -37,6 +36,13 @@ const App = () => {
     const removePublished = publish.filter(post => post.id !== id)
     setPublish(removePublished)
   }
+
+  useEffect(() => {
+    if (publish.length > oldPublishLength) {
+      setOldPublishLength(publish.length)
+      alert('Il post è stato pubblicato')
+    }
+  }, [oldPublishLength, publish])
 
   return (
     <div className="container my-5">
