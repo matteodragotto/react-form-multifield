@@ -1,7 +1,6 @@
 import { useState } from "react"
 
 const defaultFormData = {
-  id: 0,
   title: '',
   image: '',
   content: '',
@@ -21,6 +20,8 @@ const App = () => {
 
   const changeHandler = (e) => {
 
+
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -28,9 +29,8 @@ const App = () => {
   }
 
   const publishHandler = () => {
-    setPublish([...publish, { formData, id: publish.length + 1 }])
+    setPublish([...publish, { ...formData, id: publish.length + 1 }])
     console.log(publish);
-
   }
 
   const removeHandler = (id) => {
@@ -92,14 +92,14 @@ const App = () => {
             </div>
 
             <button className="btn btn-success m-3" type="submit"> Salva</button>
-            <button className="btn btn-primary m-3" onClick={publishHandler}>Pubblica</button>
+            <button className="btn btn-primary m-3" type='button' onClick={publishHandler}>Pubblica</button>
 
           </form>
         </div>
         <div className="col-6">
           <ul className="list-group">
-            {publish.map((post, index) => (
-              <li key={index} className="list-group-item d-flex justify-content-around flex-wrap" >
+            {publish.map(post => (
+              <li key={post.id} className="list-group-item d-flex justify-content-around" >
                 <span>{post.title}</span>
                 <span>{post.image}</span>
                 <span>{post.content}</span>
