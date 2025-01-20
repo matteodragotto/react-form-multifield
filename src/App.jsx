@@ -28,10 +28,10 @@ const App = () => {
     })
   }
 
-  const removeHandler = (id) => {
-    const newPostList = postTitle.filter(title => title.id !== id)
-    setPostTitle(newPostList)
-  }
+  // const removeHandler = (id) => {
+  //   const newPostList = postTitle.filter(title => title.id !== id)
+  //   setPostTitle(newPostList)
+  // }
 
   return (
     <div className="container my-5">
@@ -48,6 +48,28 @@ const App = () => {
               value={formData.title}
               onChange={changeHandler}
             />
+            <input
+              type="url"
+              className="form-control"
+              name="image"
+              placeholder="Immagine"
+              value={formData.image}
+              onChange={changeHandler}
+            />
+            <input
+              type='textarea'
+              className="form-control"
+              name='content'
+              placeholder="Testo"
+              value={formData.content}
+              onChange={changeHandler}
+            />
+            <select name="category" id="category" onChange={changeHandler}>
+              <option value='Cucina'>Cucina</option>
+              <option value='Viaggi'>Viaggi</option>
+              <option value='Auto'>Auto</option>
+              <option value='Tech'>Tech</option>
+            </select>
             <button className="btn btn-success my-3" type="submit"> Invia</button>
           </form>
         </div>
