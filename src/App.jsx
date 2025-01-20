@@ -6,7 +6,7 @@ const defaultFormData = {
   image: '',
   content: '',
   category: '',
-  tags: '',
+  tags: [],
   published: false
 }
 
@@ -64,12 +64,29 @@ const App = () => {
               value={formData.content}
               onChange={changeHandler}
             />
-            <select name="category" id="category" onChange={changeHandler}>
+            <select className='form-select' name="category" id="category" onChange={changeHandler}>
               <option value='Cucina'>Cucina</option>
               <option value='Viaggi'>Viaggi</option>
               <option value='Auto'>Auto</option>
               <option value='Tech'>Tech</option>
             </select>
+            <h3 className="mt-3">Scegli dei tag</h3>
+            <div className="tagsContainer d-flex justify-content-start">
+              <div className="form-check mt-3">
+                <input type='checkbox' className='form-check-input' name='tags' value='Piatti veloci' id='piattiVeloci' onChange={changeHandler} />
+                <label class="form-check-label" htmlFor='piattiVeloci'>
+                  Piatti veloci
+                </label>
+              </div>
+              <div className="form-check mt-3">
+                <input type='checkbox' className='form-check-input' name='tags' value='Cucina sana' id='cucinaSana' onChange={changeHandler} />
+                <label class="form-check-label" htmlFor='cucinaSana'>
+                  Cucina sana
+                </label>
+              </div>
+
+
+            </div>
             <button className="btn btn-success my-3" type="submit"> Invia</button>
           </form>
         </div>
