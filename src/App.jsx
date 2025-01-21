@@ -1,4 +1,3 @@
-import { use } from "react"
 import { useState, useEffect } from "react"
 
 const defaultFormData = {
@@ -47,8 +46,8 @@ const App = () => {
   return (
     <div className="container my-5">
       <div className="row">
-        <h1>Inserisci qui il titolo dell'articolo per il tuo blog</h1>
-        <div className="col-6 d-flex flex-column">
+        <h1>Aggiungi un post al tuo blog</h1>
+        <div className="col-12 d-flex flex-column">
 
           <form action="#" onSubmit={submitHandler}>
             <input
@@ -67,42 +66,53 @@ const App = () => {
               value={formData.image}
               onChange={changeHandler}
             />
-            <input
-              type='textarea'
-              className="form-control"
-              name='content'
+            <textarea type='textarea' className="form-control" name='content'
               placeholder="Testo"
               value={formData.content}
-              onChange={changeHandler}
-            />
+              onChange={changeHandler}>
+            </textarea>
+
             <select className='form-select' name="category" id="category" onChange={changeHandler}>
-              <option value='Cucina'>Cucina</option>
-              <option value='Viaggi'>Viaggi</option>
-              <option value='Auto'>Auto</option>
-              <option value='Tech'>Tech</option>
+              <option selected>Seleziona una categoria</option>
+              <option value='Framework'>Framework</option>
+              <option value='Linguaggi di programmazione'>Linguaggi di programmazione</option>
+              <option value='Strumenti di sviluppo'>Strumenti di sviluppo</option>
+              <option value='Gestione dei pacchetti'>Gestione dei pacchetti</option>
             </select>
+
             <h3 className="mt-3">Scegli dei tag</h3>
             <div className="tagsContainer d-flex justify-content-start">
+
               <div className="form-check m-3 p-3">
-                <input type='checkbox' className='form-check-input' name='tags' value='Piatti veloci' id='piattiVeloci' onChange={changeHandler} />
-                <label className="form-check-label" htmlFor='piattiVeloci'>
-                  Piatti veloci
+                <input type='checkbox' className='form-check-input' name='tags' value='html' id='html' onChange={changeHandler} />
+                <label className="form-check-label" htmlFor='html'>
+                  HTML
                 </label>
               </div>
+
               <div className="form-check m-3 p-3">
-                <input type='checkbox' className='form-check-input' name='tags' value='InnovazioneTech' id='innovazioneTech' onChange={changeHandler} />
-                <label className="form-check-label" htmlFor='innovazioneTech'>
-                  Innovazione Tech
+                <input type='checkbox' className='form-check-input' name='tags' value='InnovazioneTech' id='css' onChange={changeHandler} />
+                <label className="form-check-label" htmlFor='css'>
+                  CSS
+                </label>
+              </div>
+
+              <div className="form-check m-3 p-3">
+                <input type='checkbox' className='form-check-input' name='tags' value='js' id='js' onChange={changeHandler} />
+                <label className="form-check-label" htmlFor='js'>
+                  JS
                 </label>
               </div>
             </div>
+
+
 
             <button className="btn btn-success m-3" type="submit"> Salva</button>
             <button className="btn btn-primary m-3" type='button' onClick={publishHandler}>Pubblica</button>
 
           </form>
         </div>
-        <div className="col-6">
+        <div className="col-12">
           <ul className="list-group">
             {publish.map(post => (
               <li key={post.id} className="list-group-item d-flex justify-content-around" >
